@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>[hidden]{display:none!important}body{margin:0}</style>
+</head>
+<body>
+<title>Para Alexandra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400;1,6..72,500&family=Caveat:wght@500;700&display=swap">
+<style>
+  :root {
+    --bg: #1d0a14;
+    --bg-glow: #3d1428;
+    --paper: #fbf0f2;
+    --ink: #3b1426;
+    --ink-soft: #8a5a6d;
+    --rose: #ff86a5;
+    --wine: #b3264f;
+    --gold: #f3c872;
+    --text: #f9e6ec;
+    --muted: #c89bad;
+    --display: "Gloock", "Didot", Georgia, serif;
+    --body: "Newsreader", Georgia, "Times New Roman", serif;
+    --hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: radial-gradient(120% 70% at 50% -10%, var(--bg-glow) 0%, var(--bg) 65%) var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 18px;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #sky { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+  #app {
+    position: relative; z-index: 1;
+    min-height: 100%;
+    max-width: 480px; margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 16px 20px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .top { display: flex; justify-content: space-between; align-items: baseline; }
+  .brand { font-family: var(--hand); font-size: 24px; color: var(--rose); }
+  .step { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .screen { display: flex; flex-direction: column; gap: 22px; animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  /* Intro */
+  .eyebrow { margin: 0; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  h1 {
+    margin: 0; font-family: var(--display); font-weight: 400;
+    font-size: clamp(52px, 17vw, 78px); line-height: .95; letter-spacing: -.01em;
+    text-wrap: balance;
+  }
+  h1 em { font-style: normal; color: var(--rose); display: block; }
+  .lead { margin: 0; font-size: 19px; line-height: 1.55; color: var(--text); max-width: 34ch; }
+  .lead b { font-weight: 400; font-style: italic; color: var(--gold); }
+
+  .seal {
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 14px;
+    background: none; border: 0; padding: 0; cursor: pointer;
+    color: var(--text); font: 500 italic 20px var(--body);
+  }
+  .seal .wax {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #d8446c, var(--wine) 60%, #7c1535);
+    box-shadow: 0 6px 18px rgba(179,38,79,.45), inset 0 -4px 8px rgba(0,0,0,.25);
+    display: grid; place-items: center;
+    animation: beat 1.8s ease-in-out infinite;
+  }
+  .seal .wax svg { width: 28px; height: 28px; fill: #ffd9e3; }
+  @keyframes beat { 0%,100% { transform: scale(1); } 15% { transform: scale(1.08); } 30% { transform: scale(1); } 45% { transform: scale(1.05); } }
+  .seal:focus-visible .wax, .btn:focus-visible, .key:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+  /* Poem letter */
+  .letter {
+    position: relative;
+    background: var(--paper); color: var(--ink);
+    border-radius: 4px 4px 18px 4px;
+    padding: 28px 24px 24px;
+    box-shadow: 0 24px 50px rgba(0,0,0,.4), 0 2px 0 rgba(255,255,255,.4) inset;
+    transform: rotate(-.6deg);
+  }
+  .letter::before {
+    content: ""; position: absolute; inset: 10px; border: 1px solid rgba(179,38,79,.16); border-radius: 2px 2px 12px 2px; pointer-events: none;
+  }
+  .week { margin: 0 0 18px; font-family: var(--hand); font-size: 26px; color: var(--wine); line-height: 1; }
+  .verses { display: flex; flex-direction: column; gap: 4px; min-height: 8.5em; }
+  .line {
+    margin: 0; font-style: italic; font-size: 22px; line-height: 1.45;
+    opacity: 0; transform: translateY(6px); animation: ink .6s ease forwards;
+  }
+  @keyframes ink { to { opacity: 1; transform: none; } }
+  .key {
+    font: inherit; font-style: normal; font-weight: 500; color: var(--wine);
+    background: linear-gradient(transparent 58%, rgba(243,200,114,.7) 58%);
+    border: 0; padding: 0 3px; margin: 0 -1px; border-radius: 2px; cursor: pointer;
+    animation: glow 1.6s ease-in-out infinite;
+  }
+  @keyframes glow { 50% { background-color: rgba(243,200,114,.35); } }
+  .key.taken { animation: none; background: none; color: var(--ink-soft); text-decoration: underline dotted rgba(138,90,109,.6); cursor: default; }
+  .hint { margin: 18px 0 0; font-family: var(--hand); font-size: 21px; color: var(--ink-soft); min-height: 1.3em; }
+
+  .btn {
+    align-self: stretch;
+    border: 0; border-radius: 999px; cursor: pointer;
+    padding: 16px 22px; font: 500 italic 19px var(--body);
+    background: var(--rose); color: #3a0d1e;
+    box-shadow: 0 10px 24px rgba(255,134,165,.25);
+    animation: rise .5s ease both;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn.ghost { background: transparent; color: var(--muted); box-shadow: none; border: 1px solid rgba(200,155,173,.4); }
+
+  /* Word tray */
+  .tray { display: flex; flex-direction: column; gap: 8px; }
+  .tray-label { margin: 0; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .slots { display: flex; flex-wrap: wrap; gap: 6px; }
+  .slot {
+    min-width: 34px; height: 32px; padding: 0 10px;
+    display: inline-grid; place-items: center;
+    border-radius: 999px; border: 1px dashed rgba(200,155,173,.35);
+    font-family: var(--hand); font-size: 20px; color: transparent;
+    font-variant-numeric: tabular-nums;
+  }
+  .slot.filled { border: 1px solid rgba(243,200,114,.55); color: var(--gold); background: rgba(243,200,114,.08); }
+  .slot.pop { animation: pop .45s cubic-bezier(.3,1.6,.5,1); }
+  @keyframes pop { from { transform: scale(.6); } to { transform: scale(1); } }
+  .flyer { position: fixed; z-index: 10; pointer-events: none; font: 500 22px var(--body); color: var(--gold); margin: 0; }
+
+  /* Final */
+  .sentence {
+    margin: 0; font-family: var(--display); font-weight: 400;
+    font-size: clamp(40px, 12.5vw, 58px); line-height: 1.05; text-wrap: balance;
+  }
+  .sentence span { display: inline-block; opacity: 0; transform: translateY(12px) scale(.96); animation: word .7s cubic-bezier(.2,.8,.2,1) forwards; }
+  .sentence span.hl { color: var(--rose); }
+  @keyframes word { to { opacity: 1; transform: none; } }
+  .sign { margin: 0; font-family: var(--hand); font-size: 30px; line-height: 1.2; color: var(--gold); opacity: 0; animation: rise .9s ease forwards; }
+  .sign small { display: block; font-family: var(--body); font-style: italic; font-size: 18px; color: var(--text); margin-top: 10px; line-height: 1.5; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; animation-iteration-count: 1 !important; }
+  }
+</style>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<div id="app">
+  <header class="top">
+    <span class="brand">Alexandra &amp; yo</span>
+    <span class="step" id="step">2 meses</span>
+  </header>
+
+  <main>
+    <section class="screen" id="intro">
+      <p class="eyebrow">Ocho semanas, ocho poemas</p>
+      <h1>Para <em>Alexandra</em></h1>
+      <p class="lead">Un poema pequeño por cada semana que llevamos juntos. En cada uno hay una palabra que <b>brilla</b>: tócala para guardarla. Al final, léelas todas juntas.</p>
+      <button class="seal" id="open" type="button">
+        <span class="wax"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.7 4.5c2.1 0 3.5 1.2 4.3 2.4.8-1.2 2.2-2.4 4.3-2.4 3.7 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z"/></svg></span>
+        Abrir la carta
+      </button>
+    </section>
+
+    <section class="screen" id="poem" hidden>
+      <article class="letter" aria-live="polite">
+        <p class="week" id="week"></p>
+        <div class="verses" id="verses"></div>
+        <p class="hint" id="hint"></p>
+      </article>
+      <button class="btn" id="next" type="button" hidden>Siguiente poema</button>
+    </section>
+
+    <section class="screen" id="final" hidden>
+      <p class="eyebrow">Tus ocho palabras, juntas</p>
+      <h2 class="sentence" id="sentence"></h2>
+      <p class="sign" id="sign">Feliz dos meses, Alexandra.<small>Gracias por cada una de estas semanas. Te quiero, y quiero muchas más.</small></p>
+      <button class="btn ghost" id="again" type="button" hidden>Leer los poemas otra vez</button>
+    </section>
+  </main>
+
+  <footer class="tray" id="tray" hidden>
+    <p class="tray-label">Palabras guardadas</p>
+    <div class="slots" id="slots"></div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  // [[palabra]] marca la palabra escondida de cada poema
+  const POEMS = [
+    ["[[Dos]] extraños, una tarde,", "una risa sin razón.", "Nadie sabía todavía", "que empezaba una canción."],
+    ["Cuento días y se me escapan,", "el tiempo corre a tu lado;", "los [[meses]] contigo pasan", "como un suspiro robado."],
+    ["Tú [[y]] yo, qué cosa simple,", "y qué bonito que suena,", "como el cielo con la luna,", "como el mar con la arena."],
+    ["[[Ya]] no busco las estrellas", "cuando quiero ver brillar:", "me basta con tus ojos", "y tu forma de mirar."],
+    ["[[Eres]] calma en el ruido,", "eres sol al despertar,", "eres ese pensamiento", "que no quiero soltar."],
+    ["Si me pierdo entre los días", "y no sé por dónde ir,", "[[mi]] corazón ya conoce", "el camino hasta ti."],
+    ["No importa la hora,", "ni si llueve o si hace sol:", "el [[lugar]] donde quiero estar", "es a tu lado, amor."],
+    ["De todos los rincones", "que en el mundo he visto,", "tus brazos son, de lejos,", "mi sitio [[favorito]]."]
+  ];
+  const WORDS = POEMS.map(p => p.join(" ").match(/\[\[(.+?)\]\]/)[1]);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const $ = id => document.getElementById(id);
+  const screens = { intro: $("intro"), poem: $("poem"), final: $("final") };
+  let index = 0;
+  let collected = [];
+
+  function show(name) {
+    for (const k in screens) screens[k].hidden = k !== name;
+    // reinicia la animación de entrada
+    const s = screens[name]; s.style.animation = "none"; s.offsetHeight; s.style.animation = "";
+    window.scrollTo(0, 0);
+  }
+
+  function buildSlots() {
+    $("slots").innerHTML = WORDS.map((_, i) => `<span class="slot" data-i="${i}">${i + 1}</span>`).join("");
+  }
+
+  function renderPoem() {
+    const lines = POEMS[index];
+    $("step").textContent = `${index + 1} / ${POEMS.length}`;
+    $("week").textContent = `Semana ${index + 1}`;
+    $("hint").textContent = "";
+    $("next").hidden = true;
+    $("verses").innerHTML = lines.map((l, i) =>
+      `<p class="line" style="animation-delay:${reduce ? 0 : 250 + i * 380}ms">` +
+      l.replace(/\[\[(.+?)\]\]/, '<button type="button" class="key">$1</button>') + "</p>"
+    ).join("");
+    setTimeout(() => {
+      if (!collected.includes(index)) $("hint").textContent = "Toca la palabra que brilla";
+    }, reduce ? 0 : 250 + lines.length * 380 + 300);
+    $("verses").querySelector(".key").addEventListener("click", collect);
+    show("poem");
+  }
+
+  function collect(e) {
+    const btn = e.currentTarget;
+    if (btn.classList.contains("taken")) return;
+    btn.classList.add("taken");
+    const i = index;
+    collected.push(i);
+    const slot = $("slots").children[i];
+    const from = btn.getBoundingClientRect();
+
+    const done = () => {
+      slot.textContent = WORDS[i].toLowerCase();
+      slot.classList.add("filled", "pop");
+      const last = collected.length === POEMS.length;
+      $("hint").textContent = last ? "Ya las tienes todas…" : "Guardada ♥";
+      $("next").textContent = last ? "Ver lo que dicen juntas" : "Siguiente poema";
+      $("next").hidden = false;
+    };
+
+    if (reduce) return done();
+    const fly = document.createElement("p");
+    fly.className = "flyer";
+    fly.textContent = WORDS[i].toLowerCase();
+    fly.style.left = from.left + "px";
+    fly.style.top = from.top + "px";
+    document.body.appendChild(fly);
+    slot.scrollIntoView({ block: "nearest" });
+    const to = slot.getBoundingClientRect();
+    const dx = to.left + to.width / 2 - (from.left + from.width / 2);
+    const dy = to.top + to.height / 2 - (from.top + from.height / 2);
+    const anim = fly.animate([
+      { transform: "translate(0,0) scale(1)", opacity: 1 },
+      { transform: `translate(${dx * .5}px, ${dy * .5 - 60}px) scale(1.25)`, opacity: 1, offset: .45 },
+      { transform: `translate(${dx}px, ${dy}px) scale(.8)`, opacity: .2 }
+    ], { duration: 900, easing: "cubic-bezier(.45,0,.3,1)" });
+    burst(from.left + from.width / 2, from.top + from.height / 2, 10, 2.2);
+    anim.onfinish = () => { fly.remove(); done(); };
+  }
+
+  function finale() {
+    $("step").textContent = "2 meses";
+    $("tray").hidden = true;
+    $("again").hidden = true;
+    const sign = $("sign");
+    sign.style.animation = "none";
+    const step = reduce ? 0 : 520;
+    $("sentence").innerHTML = WORDS.map((w, i) => {
+      const txt = i === WORDS.length - 1 ? w + "." : w;
+      const hl = i >= WORDS.length - 2 ? ' class="hl"' : "";
+      return `<span${hl} style="animation-delay:${400 + i * step}ms">${txt}</span>`;
+    }).join(" ");
+    show("final");
+    const end = 400 + WORDS.length * step + 300;
+    setTimeout(() => {
+      sign.style.animation = "";
+      const r = $("sentence").getBoundingClientRect();
+      burst(innerWidth / 2, r.top + r.height / 2, 70, 5);
+    }, end);
+    setTimeout(() => { $("again").hidden = false; }, end + 1600);
+  }
+
+  $("open").addEventListener("click", () => {
+    buildSlots();
+    $("tray").hidden = false;
+    renderPoem();
+  });
+  $("next").addEventListener("click", () => {
+    if (collected.length === POEMS.length) return finale();
+    index++;
+    renderPoem();
+  });
+  $("again").addEventListener("click", () => {
+    index = 0; collected = [];
+    buildSlots();
+    $("tray").hidden = false;
+    renderPoem();
+  });
+
+  // Corazones de fondo
+  const cv = $("sky"), ctx = cv.getContext("2d");
+  let W, H, dpr;
+  const drift = [], sparks = [];
+  function resize() {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function heart(x, y, s) {
+    ctx.beginPath();
+    ctx.moveTo(x, y + s * .3);
+    ctx.bezierCurveTo(x, y, x - s * .5, y, x - s * .5, y + s * .3);
+    ctx.bezierCurveTo(x - s * .5, y + s * .6, x, y + s * .8, x, y + s);
+    ctx.bezierCurveTo(x, y + s * .8, x + s * .5, y + s * .6, x + s * .5, y + s * .3);
+    ctx.bezierCurveTo(x + s * .5, y, x, y, x, y + s * .3);
+    ctx.fill();
+  }
+  function burst(x, y, n, power) {
+    if (reduce) return;
+    const colors = ["#ff86a5", "#f3c872", "#ffd3de", "#d8446c"];
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * Math.PI * 2, v = (Math.random() * .8 + .4) * power;
+      sparks.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - power * .6, s: 8 + Math.random() * 12, life: 1, c: colors[i % colors.length] });
+    }
+  }
+  resize();
+  addEventListener("resize", resize);
+  if (!reduce) {
+    for (let i = 0; i < 16; i++) drift.push({ x: Math.random() * W, y: Math.random() * H, s: 8 + Math.random() * 16, v: .15 + Math.random() * .35, w: Math.random() * 6.28 });
+  }
+  function tick() {
+    ctx.clearRect(0, 0, W, H);
+    for (const d of drift) {
+      d.y -= d.v; d.w += .01;
+      if (d.y < -30) { d.y = H + 20; d.x = Math.random() * W; }
+      ctx.globalAlpha = .1;
+      ctx.fillStyle = "#ff86a5";
+      heart(d.x + Math.sin(d.w) * 14, d.y, d.s);
+    }
+    for (let i = sparks.length - 1; i >= 0; i--) {
+      const p = sparks[i];
+      p.x += p.vx; p.y += p.vy; p.vy += .12; p.vx *= .99; p.life -= .012;
+      if (p.life <= 0) { sparks.splice(i, 1); continue; }
+      ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.fillStyle = p.c;
+      heart(p.x, p.y, p.s);
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(tick);
+  }
+  if (!reduce) tick();
+})();
+</script>
+
+</body>
+</html>
